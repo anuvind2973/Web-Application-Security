@@ -16,11 +16,11 @@ express purpose. This paper defines a methodology for detecting and exploiting t
 applied to craft RCE zero-days for two widely deployed enterprise web applications. Generic exploits are demonstrated for
 five of the most popular template engines, including escapes from sandboxes whose entire purpose is to handle user-supplied templates safely.
 #### Let’s look at the following list of some of the most well-known template engines:
-PHP: Smarty, Twigs
-Java: Velocity, Freemaker
-Python: Jinja, Mako, Tornado
-JavaScript: – Jade, Rage
-Ruby: Liquid
+* PHP: Smarty, Twigs
+* Java: Velocity, Freemaker
+* Python: Jinja, Mako, Tornado
+* JavaScript: – Jade, Rage
+* Ruby: Liquid
 
 
 ### Detect Injection
