@@ -8,12 +8,13 @@ extremely easy to mistake for Cross-Site Scripting (XSS), or miss entirely. Unli
 directly attack web servers' internals and often obtain Remote Code Execution (RCE), turning every vulnerable
 application into a potential pivot point.</p>
 
-Template Injection can arise both through developer error and the intentional exposure of templates in an attempt
+<p align="justify">Template Injection can arise both through developer error and the intentional exposure of templates in an attempt
 to offer rich functionality, as commonly done by wikis, blogs, marketing applications, and content management systems.
 Intentional template injection is such a common use case that many template engines offer a 'sandboxed' mode for this
 express purpose. This paper defines a methodology for detecting and exploiting template injection and shows it being
 applied to craft RCE zero-days for two widely deployed enterprise web applications. Generic exploits are demonstrated for
-five of the most popular template engines, including Escapes from Sandboxes whose entire purpose is to handle user-supplied templates safely.
+five of the most popular template engines, including Escapes from Sandboxes whose entire purpose is to handle user-supplied templates safely.</p>
+
 #### Let’s look at the following list of some of the most well-known template engines:
 * PHP: Smarty, Twigs
 * Java: Velocity, Freemaker
