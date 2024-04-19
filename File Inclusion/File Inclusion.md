@@ -14,14 +14,14 @@
 
 PHP LFI vulnerable code
 
-<!--
+```
 <?php
 $file = $_GET['file']; // Vulnerable input
 
 // Include the file based on user input
 include($file . '.php');
 ?>
--->
+```
 <p align="justify">In this code, the $file variable is directly taken from the user input via the $_GET superglobal without any validation or sanitization. An attacker can exploit this vulnerability by manipulating the file parameter in the URL to include arbitrary files from the server's filesystem.</p>
 
 
