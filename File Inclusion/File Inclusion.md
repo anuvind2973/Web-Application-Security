@@ -39,16 +39,16 @@ include($file . '.php');
 
 #### Non-Recursive Path Traversal Filters
 
-* $language = str_replace('../', '', $_GET['language']);
+``` $language = str_replace('../', '', $_GET['language']); ```
 
-* http://example.com/index.php?language=../../../etc/passwd
+``` http://example.com/index.php?language=../../../etc/passwd ```
 
 <p align="justify">One of the most basic filters against LFI is a search and replace filter, where it simply deletes substrings of (../) to avoid path traversals. 
 ../ substrings were removed, which resulted in a final path being ./languages/etc/passwd. </p>
 
 <p align="justify">However, this filter is very insecure, as it is not recursively removing the ../ substring, as it runs a single time on the input string and does not apply the filter on the output string. For example, if we use ....// as our payload, then the filter would remove ../ and the output string would be ../, which means we may still perform path traversal. Let's try applying this logic to include /etc/passwd again:</p>
 
-* http://example.com/index.php?language=....//....//....//etc/passwd
+``` http://example.com/index.php?language=....//....//....//etc/passwd ```
 
 <p align="justify">The ....// substring is not the only bypass we can use, as we may use ..././ or ....\/ and several other recursive LFI payloads. Furthermore, in some cases, escaping the forward slash character may also work to avoid path traversal filters (e.g. ....\/), or adding extra forward slashes (e.g. ....////)</p>
 
