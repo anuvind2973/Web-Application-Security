@@ -1,7 +1,7 @@
 
 # File Inclusion
 
-<p align="justify">HTTP parameters to specify what is shown on the web page, which allows for building dynamic web pages, reduces the script's overall size, and simplifies the code. In such cases, parameters are used to specify which resource is shown on the page. If such functionalities are not securely coded, an attacker may manipulate these parameters to display the content of any local file on the hosting server, leading to a Local File Inclusion (LFI) vulnerability.</p>
+<p align="justify">HTTP parameters specify what is shown on the web page, which allows for building dynamic web pages, reduces the script's overall size, and simplifies the code. In such cases, parameters are used to specify which resource is shown on the page. If such functionalities are not securely coded, an attacker may manipulate these parameters to display the content of any local file on the hosting server, leading to a Local File Inclusion (LFI) vulnerability.</p>
 
 ### Local File Inclusion (LFI)
 
@@ -43,7 +43,7 @@ include($file . '.php');
 
 ``` http://example.com/index.php?language=../../../etc/passwd ```
 
-<p align="justify">One of the most basic filters against LFI is a search and replace filter, where it simply deletes substrings of (../) to avoid path traversals. 
+<p align="justify">One of the most basic filters against LFI is a search and replace filter, which it simply deletes substrings of (../) to avoid path traversals. 
 ../ substrings were removed, which resulted in a final path being ./languages/etc/passwd. </p>
 
 <p align="justify">However, this filter is very insecure, as it is not recursively removing the ../ substring, as it runs a single time on the input string and does not apply the filter on the output string. For example, if we use ....// as our payload, then the filter would remove ../ and the output string would be ../, which means we may still perform path traversal. Let's try applying this logic to include /etc/passwd again:</p>
@@ -58,7 +58,7 @@ include($file . '.php');
 
 <p align="justify">If the target web application did not allow. and / in our input, we can URL encode ../ into %2e%2e%2f, which may bypass the filter.</p>
 
-<p align="justify">Furthermore, we may also use Burp Decoder to encode the encoded string once again to have a double-encoded string, which may also bypass other types of filters.</p>
+<p align="justify">Furthermore, we may also use the Burp Decoder to encode the encoded string once again to have a double-encoded string, which may also bypass other types of filters.</p>
 
 ### Appended Extension
 
@@ -72,12 +72,12 @@ include($file . '.php');
 <p align="justify">If we combine both of these PHP limitations together, we can create very long strings that evaluate to a correct path. Whenever we reach the 4096 character limitation, the appended extension (.php) would be truncated, and we would have a path without an appended extension. Finally, it is also important to note that we would also need to start the path with a non-existing directory for this technique to work.</p>
 
 
-An example of such payload would be the following:
+An example of such a payload would be the following:
 
 ```
 ?language=non_existing_directory/../../../etc/passwd/./././.[./ REPEATED ~2048 times]
 ```
-Of course, we don't have to manually type ./ 2048 times (total of 4096 characters), but we can automate the creation of this string with the following command:
+Of course, we don't have to manually type ./ 2048 times (a total of 4096 characters), but we can automate the creation of this string with the following command:
 
 ```
 [!bash!]$ echo -n "non_existing_directory/../../../etc/passwd/" && for i in {1..2048}; do echo -n "./"; done
@@ -96,9 +96,9 @@ non_existing_directory ``` /../../../etc/passwd/./././<SNIP>././././ ```
 
 <p align="justify">Many popular web applications are developed in PHP, along with various custom web applications built with different PHP frameworks, like Laravel or Symfony. If we identify an LFI vulnerability in PHP web applications, then we can utilize different PHP Wrappers to be able to extend our LFI exploitation, and even potentially reach remote code execution.</p>
 
-<p align="justify">PHP Wrappers allow us to access different I/O streams at the application level, like standard input/output, file descriptors, and memory streams. This has a lot of uses for PHP developers. Still, as web penetration testers, we can utilize these wrappers to extend our exploitation attacks and be able to read PHP source code files or even execute system commands. This is not only beneficial with LFI attacks, but also with other web attacks like XXE, as covered in the Web Attacks module.</p>
+<p align="justify">PHP Wrappers allow us to access different I/O streams at the application level, like standard input/output, file descriptors, and memory streams. This has a lot of uses for PHP developers. Still, as web penetration testers, we can utilize these wrappers to extend our exploitation attacks and be able to read PHP source code files or even execute system commands. This is not only beneficial with LFI attacks but also with other web attacks like XXE, as covered in the Web Attacks module.</p>
 
-<p align="justify">In this section, we will see how basic PHP filters are used to read PHP source code, and in the next section, we will see how different PHP wrappers can help us in gaining remote code execution through LFI vulnerabilities.</p>
+<p align="justify">In this section, we will see how basic PHP filters are used to read PHP source code, and in the next section, we will see how different PHP wrappers can help us gain remote code execution through LFI vulnerabilities.</p>
 
 #### Input Filters
 
@@ -122,10 +122,71 @@ non_existing_directory ``` /../../../etc/passwd/./././<SNIP>././././ ```
 <p align="justify">Even after reading the sources of any identified files, we can scan them for other referenced PHP files, and then read those as well, until we are able to capture most of the web application's source or have an accurate image of what it does. It is also possible to start by reading index.php and scanning it for more references and so on, but fuzzing for PHP files may reveal some files that may not otherwise be found that way.</p>
 
 
+### PHP Wrappers
+
+<p align="justify">php wrapper can be said to a kind of code library that is available to interact with the external services, APIs or Functionalities, making it easier for php developers to work with them.</p>
 
 
 
+There are a lot of meta wrappers available in php.
 
+*file://: This is the default stream wrapper for local files and directories.
+*http://: Used for making HTTP requests and retrieving data from remote web servers.
+*https://: Similar to the “http://” wrapper, but for secure (HTTPS) connections.
+*ftp://: For accessing files on FTP servers.
+*data://: This allows you to embed data directly within the URI, often used for embedding small data sets or resources.
+*zip://: Used to access files within ZIP archives.
+*phar://: Allows access to files within Phar archives (PHP Archives).
+*glob://: Provides access to files using a pattern or glob.
+*php://: This wrapper is used for various PHP-specific streams, such as
+
+php://stdin, php://stdout, and php://memory.
+
+<p align="justify">PHP:// is a wrapper for Accessing various I/O streams. We will use php://filter — it is a kind of meta-wrapper designed to permit the application of filters to a stream at the time of opening. There are multiple parameters to this wrapper, we will use convert.base64-encode/resource= — This will convert the given file into base64 encoding and print it on screen. But we have to provide the resource that we want to read like a file name index.php.</p>
+
+#### PHP wrappers to exploit Local File inclusion
+
+http://mafialive.thm/test.php?view=php://filter/read=convert.base64-encode/resource=/var/www/html/development_testing/test.php.
+
+The filter is a meta php wrapper, and it will convert the PHP code as base64 encoding and print the results.
+
+
+### Remote File Inclusion (RFI)
+
+<p align="justify">So far in this module, we have been mainly focusing on Local File Inclusion (LFI). However, in some cases, we may also be able to include remote files "Remote File Inclusion (RFI)", if the vulnerable function allows the inclusion of remote URLs. This allows two main benefits:</p>
+
+*Enumerating local-only ports and web applications (i.e. SSRF)
+*Gaining remote code execution by including a malicious script that we host
+
+<p align="justify">In this section, we will cover how to gain remote code execution through RFI vulnerabilities. The Server-side Attacks module covers various SSRF techniques, which may also be used with RFI vulnerabilities.</p>
+
+### LFI and File Uploads
+
+<p align="justify">The File Upload Attacks module covers different techniques on how to exploit file upload forms and functionalities. However, for the attack we are going to discuss in this section, we do not require the file upload form to be vulnerable, but merely allow us to upload files. If the vulnerable function has code Execute capabilities, then the code within the file we upload will get executed if we include it, regardless of the file extension or file type. For example, we can upload an image file (e.g. image.jpg), and store a PHP web shell code within it 'instead of image data', and if we include it through the LFI vulnerability, the PHP code will get executed and we will have remote code execution.</p>
+
+#### Crafting Malicious Image
+<p align="justify">Our first step is to create a malicious image containing a PHP web shell code that still looks and works as an image. So, we will use an allowed image extension in our file name (e.g. shell.gif), and should also include the image magic bytes at the beginning of the file content (e.g. GIF8), just in case the upload form checks for both the extension and content type as well. We can do so as follows:</p>
+
+```` echo 'GIF8<?php system($_GET["cmd"]); ?>' > shell.gif ````
+
+<p align="justify">This file on its own is completely harmless and would not affect normal web applications in the slightest. However, if we combine it with an LFI vulnerability, then we may be able to reach remote code execution.</p>
+
+## Log Poisoning
+<p align="justify">A server log is a text file that contains all the activities that have been performed while communicating with the web server like files that were accessed, status codes, user-agent, location, IP, etc.</p>
+
+<p align="justify">Log poisoning or Log injection is a technique that allows the attacker to tamper with the log file contents like inserting the malicious code to the server logs to execute commands remotely or to get a reverse shell. It will work only when the application is already vulnerable to LFI.</p>
+
+<p align="justify">The PHP code includes file index.html from the include statement without proper input validation, so the inclusion of a malformed file would be evaluated. If we can control the contents of a file available on the vulnerable web application, we could insert PHP code and load the file over the LFI vulnerability to execute our code.</p>
+
+The contents that we can control are the logs that we are sending to the server.
+
+<p align="justify">In our case, the server is Nginx so the default path for logs is /var/log/nginx/access.log and it will differ according to different servers. Encoding and sending the below string gives us the logs of the server.</p>
+
+Note: Change the size to 34 for the particular string </p>
+
+```` O:9:"PageModel":1:{s:4:"file";s:25:"/var/log/nginx/access.log";} ````
+
+![Alt text](
 
 
 https://academy.hackthebox.com/module/23/section/1492
