@@ -186,7 +186,7 @@ Note: Change the size to 34 for the particular string </p>
 
 ```` O:9:"PageModel":1:{s:4:"file";s:25:"/var/log/nginx/access.log";} ````
 
-![Alt text](
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning.webp)
 
 
 https://academy.hackthebox.com/module/23/section/1492
