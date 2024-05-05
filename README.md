@@ -27,6 +27,8 @@
 * https://sushant747.gitbooks.io/total-oscp-guide/content/local_file_inclusion.html
 
 ## Insecure-deserialization (JAVA):
-  https://thevillagehacker.medium.com/insecure-deserialization-c2f0ae4a50f
+
+* https://thevillagehacker.medium.com/insecure-deserialization-c2f0ae4a50f
+* https://thehackerish.com/insecure-deserialization-explained-with-examples/
 
 
