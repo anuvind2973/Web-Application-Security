@@ -29,6 +29,7 @@
 ## Insecure-deserialization (JAVA):
 
 * https://thevillagehacker.medium.com/insecure-deserialization-c2f0ae4a50f
-* https://thehackerish.com/insecure-deserialization-explained-with-examples/
+* https://thehackerish.com/insecure-deserialization-explained-with-examples
+* https://speakerdeck.com/pwntester/surviving-the-java-deserialization-apocalypse
 
 
