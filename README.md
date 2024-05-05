@@ -32,5 +32,15 @@
 * https://thehackerish.com/insecure-deserialization-explained-with-examples
 * https://speakerdeck.com/pwntester/surviving-the-java-deserialization-apocalypse
 * https://github.com/mbechler/marshalsec
+* https://github.com/GrrrDog/Java-Deserialization-Cheat-Sheet
+* https://github.com/archang31/aacs4-writeups/blob/master/BinaryExploitation/SerialKiller/README.md
+* https://owasp.org/www-project-top-ten/2017/A8_2017-Insecure_Deserialization
+* https://cheatsheetseries.owasp.org/cheatsheets/Deserialization_Cheat_Sheet.html
+* https://owasp.org/www-community/vulnerabilities/Deserialization_of_untrusted_data
+* https://cheatsheetseries.owasp.org/assets/Deserialization_Cheat_Sheet_GOD16Deserialization.pdf
+* https://www.slideshare.net/frohoff1/appseccali-2015-marshalling-pickles
+* https://foxglovesecurity.com/2015/11/06/what-do-weblogic-websphere-jboss-jenkins-opennms-and-your-application-have-in-common-this-vulnerability/#websphere
+* https://github.com/frohoff/ysoserial
+* https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/Java.md
 
 
