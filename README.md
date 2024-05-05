@@ -26,4 +26,7 @@
 * https://systemweakness.com/local-file-inclusion-lfi-a-beginners-guide-5629bbcbcffb
 * https://sushant747.gitbooks.io/total-oscp-guide/content/local_file_inclusion.html
 
+## Insecure-deserialization (JAVA):
+  https://thevillagehacker.medium.com/insecure-deserialization-c2f0ae4a50f
+
 
