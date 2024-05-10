@@ -43,4 +43,16 @@
 * https://github.com/frohoff/ysoserial
 * https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Insecure%20Deserialization/Java.md
 
+## Insecure-deserialization (PHP):
+
+* https://nitesculucian.github.io/2018/10/06/php-object-injection-cheat-sheet/
+* https://keeplearning.dev/php-magic-methods-explained-bac7053c007d
+* https://vickieli.dev/insecure%20deserialization/exploiting-php-deserialization/
+* https://vickieli.dev/insecure%20deserialization/pop-chains/
+* https://vickieli.dev/insecure%20deserialization/php-type-juggling/
+* https://vickieli.dev/insecure%20deserialization/unserialize-exploits/
+* https://vickieli.dev/insecure%20deserialization/magic-methods/
+* https://vickieli.dev/insecure%20deserialization/php-phar/
+
+
 
