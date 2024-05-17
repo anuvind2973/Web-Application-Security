@@ -126,10 +126,10 @@ PHP magic methods are function names in PHP that have “magical” properties. 
 
 <p align="justify"> It will then search for a function named __wakeup(), and execute code in that function. __wakeup() reconstructs any resources that the object may have. It is used to reestablish any database connections that have been lost during serialization and perform other reinitialization tasks.</p>
 
-##### Step 2: Program uses the objectPermalink
+##### Step 2: Program uses the object
 The program operates on the object and uses it to perform other actions.
 
-##### Step 3: Object destructionPermalink
+##### Step 3: Object destruction
 Finally, when no reference to the deserialized object instance exists, __destruct() is called to clean up the object.
 
 ##### Exploiting PHP deserialization
@@ -161,6 +161,63 @@ And why they are useful for constructing exploits.
 <p align="justify"> Unlike __wakeup() and __destruct(), the __toString() method is only invoked when the object is treated as a string. (Although if a __toString() method is defined for the class, it is likely that it would get used somewhere.)</p>
 
 <p align="justify"> The __toString() method allows a class to decide how it will react when it is treated as a string. For example, what will print if the object were to be passed into an echo() or print() function?</p>
+
+#### Controlling variable valuesPermalink
+
+<p align="justify">One possible way of exploiting a PHP object injection vulnerability is variable manipulation. For example, you can mess with the values encoded in the serialized string.</p>
+
+````
+O:4:"User":2:{s:8:"username";s:6:"vickie";s:6:"status";s:9:"not admin";}
+````
+
+<p align="justify">In this serialize string, you can try to change the value of “status” to “admin”, and see if the application grants you admin privileges.</p>
+````
+O:4:"User":2:{s:8:"username";s:6:"vickie";s:6:"status";s:5:"admin";}
+````
+##### Getting to RCE
+
+<p align="justify"> It’s even possible to achieve RCE using PHP object injection! For example, consider this vulnerable code snippet: (taken from https://www.owasp.org/index.php/PHP_Object_Injection)</p>
+
+###### class Example2
+
+````
+{
+  private $hook;
+  function __construct(){
+      // some PHP code...
+  }
+  function __wakeup(){\
+      if (isset($this->hook)) eval($this->hook);
+  }
+}
+// some PHP code...
+$user_data = unserialize($_COOKIE['data']);
+// some PHP code...
+````
+
+<p align="justify"> You can achieve RCE using this deserialization flaw because a user-provided object is passed into unserialize. And the class Example2 has a magic function that runs eval() on user-provided input.</p>
+
+<p align="justify"> To exploit this RCE, you simply have to set your data cookie to a serialized Example2 object with the hook property set to whatever PHP code you want. You can generate the serialized object using the following code snippet:</p>
+
+###### class Example2
+
+````
+{
+   private $hook = "phpinfo();";
+}
+print urlencode(serialize(new Example2));
+// We need to use URL encoding since we are injecting the object via a URL.
+````
+
+<p align="justify"> Passing the above-generated string into the data cookie will cause the code “phpinfo();” to be executed. Once you pass the serialized object into the program, the following is what will happen in detail:</p>
+
+* You pass a serialized Example2 object into the program as the data cookie.
+* The program calls unserialize() on the data cookie.
+* Because the data cookie is a serialized Example2 object, unserialize() instantiates a new Example2 object.
+* unserialize() sees that the Example2 class has __wakeup() implemented, so __wakeup() is called.
+* __wakeup() looks for the $hook property of the object, and if it is not NULL, it runs eval($hook).
+* $hook is not NULL, and is set to “phpinfo();”, so eval(“phpinfo();”) is run.
+* RCE is achieved.
 
 
 
