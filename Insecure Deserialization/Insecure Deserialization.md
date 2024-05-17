@@ -30,6 +30,7 @@ When you need to use that data, use unserialize() to unpack and get the underlyi
 unserialize(): string containing object data -> original object
 ```
 For example, this code snippet will serialize the object “user”.
+
 ```
 <?php
 class User{
@@ -42,34 +43,53 @@ $user->status = 'not admin';
 echo serialize($user);
 ?>
 ```
+
 <p align="justify">Run the code snippet, and you will get the serialized string that represents the “user” object.</p>
+
 ```
 O:4:"User":2:{s:8:"username";s:6:"vickie";s:6:"status";s:9:"not admin";}
 ```
+
 #### Serialized string structure
 
-<p align="justify"> Let’s break this serialized string down! The basic structure of a PHP serialized string is “data type: data”. For example, “b” represents a boolean.
+<p align="justify"> Let’s break this serialized string down! The basic structure of a PHP serialized string is “data type: data”. For example, “b” represents a boolean.</p>
+
 ```
-  b:THE_BOOLEAN;
+b:THE_BOOLEAN;
 ```
+
 “i” represents an integer.
+
 ```
-  i:THE_INTEGER;
+i:THE_INTEGER;
 ```
 “d” represents a float.
-```d:THE_FLOAT;```
+
+```
+d:THE_FLOAT;
+```
+
 ”s” represents a string.
 
+```
 s:LENTH_OF_STRING:"ACTUAL_STRING";
+```
 “a” represents an array.
 
+```
 a:NUMBER_OF_ELEMENTS:{ELEMENTS}
+```
 And finally, “O” represents an object.
 
+```
 O:LENTH_OF_NAME:"CLASS_NAME":NUMBER_OF_PROPERTIES:{PROPERTIES}
-So we can see our serialized string here represents an object of the class “User”. It has two properties. The first property has the name “username” and the value “vickie”. The second property has the name “status” and the value “not admin”.
+```
 
+<p align="justify"> So we can see our serialized string here represents an object of the class “User”. It has two properties. The first property has the name “username” and the value “vickie”. The second property has the name “status” and the value “not admin”.</p>
+
+```
 O:4:"User":2:{s:8:"username";s:6:"vickie";s:6:"status";s:9:"not admin";}
+```
 
 
 #### The magic methodsPermalink
