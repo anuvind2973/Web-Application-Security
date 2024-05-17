@@ -91,8 +91,53 @@ O:LENTH_OF_NAME:"CLASS_NAME":NUMBER_OF_PROPERTIES:{PROPERTIES}
 O:4:"User":2:{s:8:"username";s:6:"vickie";s:6:"status";s:9:"not admin";}
 ```
 
+#### Deserializing
 
-#### The magic methodsPermalink
+When you are ready to operate on the object again, you can deserialize the string with unserialize().
+
+```
+<?php
+class User{
+  public $username;
+  public $status;
+}
+$user = new User;
+$user->username = 'vickie';
+$user->status = 'not admin';
+$serialized_string = serialize($user);
+$unserialized_data = unserialize($serialized_string);
+var_dump($unserialized_data);
+var_dump($unserialized_data["status"]);
+?>
+```
+#### Unserialize() under the hood
+
+So how does unserialize() work under the hood? And why does it lead to vulnerabilities?
+
+What are PHP magic methods?
+
+PHP magic methods are function names in PHP that have “magical” properties. Learn more about them here.
+
+<p align="justify">The magic methods that are relevant for us now are __wakeup() and __destruct(). If the class of the serialized object implements any method named __wakeup() and __destruct(), these methods will be executed automatically when unserialize() is called on an object.</p>
+
+##### Step 1: Object instantiation
+
+<p align="justify"> Instantiation is when the program creates an instance of a class in memory. That is what unserialize() does. It takes the serialized string, which specifies the class and the properties of that object. With that data, unserialize() creates a copy of the originally serialized object.</p>
+
+<p align="justify"> It will then search for a function named __wakeup(), and execute code in that function. __wakeup() reconstructs any resources that the object may have. It is used to reestablish any database connections that have been lost during serialization and perform other reinitialization tasks.</p>
+
+##### Step 2: Program uses the objectPermalink
+The program operates on the object and uses it to perform other actions.
+
+##### Step 3: Object destructionPermalink
+Finally, when no reference to the deserialized object instance exists, __destruct() is called to clean up the object.
+
+##### Exploiting PHP deserialization
+When you control a serialized object that is passed into unserialize(), you control the properties of the created object. You might also be able to hijack the flow of the application by controlling the values passed into automatically executed methods like __wakeup() or __destruct().
+
+This is called a PHP object injection. PHP object injection can lead to variable manipulation, code execution, SQL injection, path traversal, or DoS.
+
+#### The magic methods
 <p align="justify">There are four magic methods that are particularly useful when trying to exploit an unserialize() vulnerability: __wakeup(), __destruct(), __toString() and __call(). Today, we’re gonna discuss</p>
 
 * What they are
