@@ -8,7 +8,7 @@
 
 #33 Authentication bypass
 
-<p align="justify"> Besides RCE, unserialize() issues are often used to bypass authentication controls of an application. There are two ways to do this: by manipulating object properties that are used as access control, and by utilizing type juggling issues to trick an application. Both methods rely on the fact that the end-user can control the object passed into unserialize().</p>
+<p align="justify"> Besides RCE, unserialize() issues are often used to bypass the authentication controls of an application. There are two ways to do this: by manipulating object properties that are used as access control, and by utilizing type juggling issues to trick an application. Both methods rely on the fact that the end-user can control the object passed into unserialize().</p>
 
 ### Manipulating object properties to bypass authentication
 
@@ -58,14 +58,18 @@ if ($example_int == $example_str) {
 <p align="justify"> However, it is also important to note that this behavior is also a major source of bugs and security vulnerabilities.</p>
 
 <p align="justify">For example, when PHP needs to compare the string “7 puppies” to the integer 7, PHP will attempt to extract the integer from the string. So this comparison will evaluate to True.</p>
+
 ````
 ("7 puppies" == 7) -> True
 
 ````
+
  <p align="justify"> But what if the string that is being compared does not contain an integer? The string will then be converted to a “0”. So the following comparison will also evaluate to True:</p>
+ 
 ````
 ("Puppies" == 0) -> True
 ````
+
 <p align="justify"> Loose type comparison behavior like these is pretty common in PHP and many built-in functions work in the same way. You can probably already see how this can be very problematic, but how exactly can hackers exploit this behavior? </p>
 
 ### How vulnerability arises
@@ -93,14 +97,18 @@ if ($_POST["password"] == "Admin_Password") {
 <p align="justify"> However, this vulnerability is not always exploitable and often needs to be combined with a deserialization flaw. The reason for this is that POST, GET parameters and cookie values are, for the most part, passed as strings or arrays into the program. </p>
 
 <p align="justify"> If the POST parameter from the example above is passed into the program as a string, PHP would be comparing two strings, and no type conversion would be needed. And “0” and “Admin_Password” are, obviously, different strings.</p>
+
 ````
 ("0" == "Admin_Password") -> False
 ````
+
 <p align="justify"> However, type juggling issues can be exploited if the application takes accepts the input via functions like json_decode() or unserialize(). This way, it would be possible for the end-user to specify the type of input passed in.</p>
+
 ````
 {"password": "0"}
 {"password": 0}
 ````
+
 <p align="justify"> Consider the above JSON blobs. The first one would cause the password parameter to be treated as a string whereas the second one would cause the input to be interpreted as an integer by PHP. This gives an attacker fine-grained control of the input data type and therefore the ability to exploit type juggling issues.</p>
 
 ### Avoiding type juggling issues in PHP code
@@ -138,7 +146,9 @@ if ($example_int === $example_str_2) {
   echo("This will not print.");
 }
 ````
+
 <p align="justify"> Whereas after typecasting, PHP will only preserve the number extracted from a string, and “7_string” will become the integer 7.</p>
+
 ````
 $example_int = 7;
 $example_str = "7_string";
