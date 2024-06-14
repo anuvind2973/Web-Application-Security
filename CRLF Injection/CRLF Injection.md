@@ -11,3 +11,15 @@ To understand CRLF injection, let’s break down the term:
 <p align="justify"> In the context of HTTP, CRLF refers to the sequence of both CR and LF characters (“\r\n”). These characters are used to separate lines in the HTTP protocol.</p>
 
 <p align="justify"> The CRLF injection vulnerability arises when user-controlled data (input) is not properly sanitized or validated before being used in constructing an HTTP response. Attackers exploit this vulnerability by injecting CRLF characters into user input to manipulate the HTTP response.</p>
+
+### Discovery
+
+To find a CRLF vulnerability, you want to logically think about where in the web application user input would be:
+
+* Reflected as a header (cookies, redirects)
+* Included in a file (logs)
+* Included in a server-side request (email, server-side HTTP request)
+* To include a CRLF in a URL parameter, use these URL-encoded values:
+
+<b> Carriage return: %0d </b>
+<b> Line feed: %0a </b>
