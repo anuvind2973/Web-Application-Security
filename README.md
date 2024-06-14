@@ -54,5 +54,43 @@
 * https://vickieli.dev/insecure%20deserialization/magic-methods/
 * https://vickieli.dev/insecure%20deserialization/php-phar/
 
+## CRLF injection
+
+* https://duckduckgo.com/?q=CRLF+Injection&t=brave&ia=web
+* https://medium.com/@R00tendo/crlf-injection-ae26521c5e4c
+* https://medium.com/@Land2Cyber/advanced-techniques-for-crlf-injection-attacks-beyond-the-basics-9ac8cfcd5fab
+* https://securitylit.medium.com/understanding-crlf-injection-7b042fd5fb22
+* https://medium.com/@ibrahimhussain1228/crlf-injection-7dd360318642
+* https://medium.com/@protostar0/crlf-injection-allow-cookie-injection-in-root-domain-xss-812cd807ba5b
+* https://medium.com/mii-cybersec/what-is-crlf-injection-and-how-does-it-work-b2ff6428178e
+* https://medium.com/@Land2Cyber/crlf-injection-in-the-wild-real-world-examples-and-lessons-learned-45e1af7e760e
+* https://medium.com/@briskinfosec/crlf-injection-attack-f0cb50554aab
+* https://medium.com/@Land2Cyber/crlf-injection-in-restful-apis-6475e09afb76
+* https://medium.com/tag/crlf-injection/archive
+* https://dev.to/bytehackr/understanding-and-mitigating-crlf-injection-33oe
+* https://wesecureapp-smm.medium.com/understanding-crlf-injection-a-web-application-vulnerability-and-mitigation-7be81922a4cc
+* https://medium.com/@a7med.ctf/crlf-to-xss-8059ceefd349
+* https://www.kosli.com/blog/crlf-injection-explained-an-in-depth-guide/
+* https://joshuaprovoste.com/crlf-injection-payloads/
+* https://medium.com/@rohitpatil1625/how-i-tested-for-crlf-injection-with-akto-2bd24bda047f
+* https://medium.com/cyberverse/crlf-injection-playbook-472c67f1cb46
+* https://medium.com/@tomnomnom/crlf-injection-into-phps-curl-options-e2e0d7cfe545
+* https://medium.com/@rahulmehta9518/crlf-injection-0e650e906b40
+* https://medium.com/@vasumudiraj57/crlf-0d-0a-injection-15f2623c0496
+* https://medium.com/cyberverse/crlf-injection-playbook-472c67f1cb46
+* https://www.acunetix.com/websitesecurity/crlf-injection/
+* https://freedium.cfd/https://medium.com/cyberverse/crlf-injection-playbook-472c67f1cb46
+* https://portswigger.net/web-security/request-smuggling/advanced/lab-request-smuggling-h2-request-splitting-via-crlf-injection
+* https://medium.com/@impratikdabhi/web-application-vulnerabilities-crlf-injection-and-beyond-e7c7144ac0e8
+* https://akshayravic09yc47.medium.com/crlf-injection-leads-to-xss-f92a07db9848
+* https://freedium.cfd/https://medium.com/@mares.viktor/escalating-xss-with-crlf-to-account-takeover-without-stealing-the-session-token-a705e4363cf1
+* https://medium.com/@mares.viktor/escalating-xss-with-crlf-to-account-takeover-without-stealing-the-session-token-a705e4363cf1
+* https://medium.com/@solanki23pratik/exploiting-crlf-injection-4237c4802010
+* https://hetroublemakr.medium.com/
+* https://medium.com/geekculture/really-understanding-csrf-228398aeaed3
+* https://medium.com/shallvhack/owasp-1-injection-cad772e39a0f
+* https://github.com/anuvind2973/Web-Application-Security/edit/main/README.md
+
+
 
 
