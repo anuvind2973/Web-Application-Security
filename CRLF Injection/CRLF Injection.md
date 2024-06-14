@@ -21,5 +21,5 @@ To find a CRLF vulnerability, you want to logically think about where in the web
 * Included in a server-side request (email, server-side HTTP request)
 * To include a CRLF in a URL parameter, use these URL-encoded values:
 
-<b> Carriage return: %0d </b>
+<b> Carriage return: %0d </b> /n
 <b> Line feed: %0a </b>
