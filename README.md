@@ -91,6 +91,36 @@
 * https://medium.com/shallvhack/owasp-1-injection-cad772e39a0f
 * https://github.com/anuvind2973/Web-Application-Security/edit/main/README.md
 
+# Rrace condition
+* https://medium.com/@bugbountyhunter225/write-up-lab-bypassing-rate-limits-via-race-conditions-519fc0a666f3
+* https://medium.com/@ry4nnnn/portswigger-labs-race-conditions-2b4c5a708639
+* https://www.firecompass.com/blog/demystifying-race-condition-vulnerabilities/
+* https://sakurity.com/blog/2015/05/21/starbucks.html
+* https://appsecexplained.gitbook.io/appsecexplained/common-vulns/race-conditions/limit-overrun
+* https://d4luc1.medium.com/race-condition-1893f988d601
+* https://medium.com/@TheCrazyAcademic/smashing-the-state-machine-ep-2024915740e
+* https://www.youtube.com/watch?v=VzqG_-a8_Jo&t=322s
+* https://infosecwriteups.com/dive-into-single-packet-attack-3d3849ffe1d2
+* https://medium.com/@blackarazi/race-condition-on-change-email-leads-to-arbitrary-email-forgery-741b720ac840
+* https://amsghimire.medium.com/race-condition-vulnerabilities-9b9f45ae8ff6
+* https://infosecwriteups.com/racing-against-time-the-hidden-dangers-of-race-conditions-in-modern-applications-2aedfb26e4fc
+* https://medium.com/@GemiIang/race-condition-on-everywhere-cd4273adaf03
+* https://b33pl0g1c.medium.com/understanding-exploiting-and-avoiding-the-race-condition-vulnerability-80e9f5ee4f07
+* https://blog.devgenius.io/mastering-race-conditions-with-promise-race-in-javascript-15295c106d26
+* https://systemweakness.com/exploring-the-sneaky-world-of-race-condition-vulnerabilities-35c343735546
+* https://infosecwriteups.com/race-condition-that-could-result-to-rce-a-story-with-an-app-that-temporary-stored-an-uploaded-9a4065368ba3
+* https://medium.com/@jaskaur.9220/understanding-race-conditions-in-programming-a-simple-explanation-cc82a784f491
+* https://medium.com/@zuyufmanna/mastering-node-js-concurrency-race-condition-detection-and-prevention-3e0cfb3ccb07
+* https://medium.com/swlh/hacking-banks-with-race-conditions-2f8d55b45a4b
+* https://portswigger.net/research/smashing-the-state-machine
+* https://medium.com/@adithyaviswam/beware-of-race-conditions-with-lifecycle-hooks-c56b995469e2
+* https://medium.com/@satyendra.jaiswal/demystifying-race-conditions-a-deep-dive-into-thread-safety-and-concurrency-4ad070690430
+* https://saminbinh.medium.com/race-condition-101-everything-you-need-to-know-about-race-condition-attacks-efe5b655632f
+* https://portswigger.net/web-security/race-conditions
+* https://www.youtube.com/watch?v=tKJzsaB1ZvI
+* https://cyberw1ng.medium.com/detecting-and-exploiting-limit-overrun-race-conditions-with-turbo-intruder-424bed12f2cf
+* https://medium.com/@embossdotar/tryhackme-race-conditions-writeup-67ddd0d7eb9f
+
 
 
 
